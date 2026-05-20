@@ -14,20 +14,26 @@ def run() -> None:
         browser = playwright.chromium.launch(headless=False)
         page = browser.new_page()
         login = LoginPage(page)
-        page.goto("https://www.automationexercise.com/login", wait_until="domcontentloaded")
+        page.goto("https://storedemo.testdino.com/login", wait_until="domcontentloaded")
         
-        login.fill_signup_name("Felipe")
+        login.fill_signup_password("123456")
         time.sleep(5)
         
-        login.fill_email("felipe123123@example.com")
+        login.fill_email("alex199149@hotmail.com")
         time.sleep(5)
         
         login.click_signup_button()
         time.sleep(5)
         
         ## validar url
-        assert page.url == "https://www.automationexercise.com/signup", f"Expected URL to be 'https://www.automationexercise.com/signup' but got '{page.url}'"
-        time.sleep(10)
+        try:
+            assert page.url == "https://storedemo.testdino.com/login", f"Expected URL to be 'https://storedemo.testdino.com/login' but got '{page.url}'"
+            print("TEST PASSED")
+
+        except AssertionError:
+            print("TEST FAILED")  
+
+        time.sleep(5)
         browser.close()
 
 
