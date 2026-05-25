@@ -1,13 +1,12 @@
 class HomePage:
+
     def __init__(self, driver):
         self.driver = driver
-        self.search_input = driver.locator('#search_product')
-        self.search_button = driver.locator('#submit_search')
-        self.products = driver.locator('.productinfo')
-
-    def search_product(self, product_name):
-        self.search_input.fill(product_name)
-        self.search_button.click()
-
+        self.products = driver.locator('.slick-slide:not(.slick-cloned)')
+        self.first_product = driver.locator('.slick-slide:not(.slick-cloned) a').first
+        
     def get_products_count(self):
         return self.products.count()
+
+    def click_first_product(self):
+        self.first_product.click()

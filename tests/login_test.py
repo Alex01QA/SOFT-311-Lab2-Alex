@@ -16,10 +16,10 @@ def run() -> None:
         login = LoginPage(page)
         page.goto("https://storedemo.testdino.com/login", wait_until="domcontentloaded")
         
-        login.fill_signup_password("123456")
-        time.sleep(5)
-        
         login.fill_email("alex199149@hotmail.com")
+        time.sleep(5)
+
+        login.fill_signup_password("123456")
         time.sleep(5)
         
         login.click_signup_button()

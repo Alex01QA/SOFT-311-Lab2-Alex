@@ -2,14 +2,24 @@ class CartPage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.first_product = driver.locator('.product-image-wrapper').first
-        self.add_to_cart_button = driver.locator('.add-to-cart').first
-        self.continue_shopping_button = driver.locator('.btn-success')
-        self.cart_button = driver.locator('a[href="/view_cart"]').first
+
+        # Productos
+        self.products = driver.locator('a[href^="/product/"]')
+
+        # Primer producto
+        self.first_product = self.products.first
+
+        # Botón carrito header
+        self.cart_button = driver.locator('[data-testid="header-cart-icon"]')
+
+    def click_first_product(self):
+        self.first_product.click()
 
     def add_product_to_cart(self):
-        self.first_product.hover()
-        self.add_to_cart_button.click()
+        add_button = self.driver.locator('button:has-text("Add to cart")')
+        add_button.click()
 
     def open_cart(self):
         self.cart_button.click()
+        viewCart_button = self.driver.locator('[data-testid="view-cart-button"]')
+        viewCart_button.click()

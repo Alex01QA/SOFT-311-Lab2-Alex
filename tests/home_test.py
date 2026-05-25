@@ -7,24 +7,35 @@ from playwright.sync_api import sync_playwright
 from pages.home_page import HomePage
 
 
-def run() -> None:
+def run():
+
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=False)
         page = browser.new_page()
         home = HomePage(page)
         page.goto(
-            "https://www.automationexercise.com/products",
-            wait_until="domcontentloaded"
+            "https://storedemo.testdino.com/",
+            wait_until="domcontentloaded",
         )
-        home.search_product("Tshirt")
+        #page.pause()
 
-        try:
-            assert home.get_products_count() > 0
-            print("TEST PASSED")
+        # Esperar productos
+        page.wait_for_selector(
+            '.slick-slide'
+        )
 
-        except AssertionError:
-            print("TEST FAILED") 
+        # Validar productos visibles
+        products_count = home.get_products_count()
+        assert products_count > 0, f"Expected products but found {products_count}"
+        print(f"Products found: {products_count}")
 
+        # Abrir primer producto
+        home.click_first_product()
+        page.wait_for_timeout(3000)
+
+        # Validar navegación
+        assert "product" in page.url.lower()
+        print("TEST PASSED")
         browser.close()
 
 if __name__ == "__main__":
