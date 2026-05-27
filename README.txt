@@ -14,9 +14,11 @@ WINDOWS
 
 ----------------------------------------------------------------
 
-Comando para correrlo
+Comando para correr todos los test
+.\.venv/bin/python -m pytest --html=report.html --self-contained-html
 
-.\.venv\Scripts\python tests/login_test.py
+Comando para correr un test especifico (ejm login_test)
+.\.venv/bin/python -m pytest tests/login_test.py --html=report.html --self-contained-html
 
 
 ----------------------------------------------------------------
@@ -36,6 +38,8 @@ Comandos para crear el ambiente Windows
 5- python -m playwright install chromium
 ----------------------------------------------------------------
 
-Comando para correrlo
+Comando para correr todos los test
+pytest --html=report.html --self-contained-html
 
-.\.venv\Scripts\python tests/login_test.py
+Comando para correr un test especifico (ejm login_test)
+pytest tests/login_test.py --html=report.html --self-contained-html

@@ -9,7 +9,7 @@ from pages.signUp_page import SignUpPage
 import time
 
 
-def run() -> None:
+def test_sign_up() -> None:
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=False)
         page = browser.new_page()
@@ -43,7 +43,3 @@ def run() -> None:
 
         time.sleep(5)
         browser.close()
-
-
-if __name__ == "__main__":
-    run()

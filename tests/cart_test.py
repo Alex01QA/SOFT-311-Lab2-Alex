@@ -7,7 +7,7 @@ from playwright.sync_api import sync_playwright
 from pages.cart_page import CartPage
 
 
-def run():
+def test_cart():
 
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=False)
@@ -34,6 +34,3 @@ def run():
         assert "cart" in page.url.lower(),f"Unexpected URL: {page.url}"
         print("TEST PASSED")
         browser.close()
-
-if __name__ == "__main__":
-    run()

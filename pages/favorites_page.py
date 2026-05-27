@@ -3,27 +3,29 @@ class FavoritesPage:
     def __init__(self, driver):
         self.driver = driver
 
-        # Productos
+        # cards productos
         self.products = driver.locator('a[href^="/product/"]')
 
-        # Primer producto
+        # primer producto
         self.first_product = self.products.first
 
-        # Botón favoritos header
-        self.fav_header_button = driver.locator('[data-testid="header-wishlist-button"]')
-
-        # Botón favoritos
-        self.fav_button = driver.locator('[data-testid="all-products-wishlist-button"]')
-
-        # Mostrar boton
-        self.show_fav_button = driver.locator('[data-testid="show-wishlist-button"]')
-
-   # def click_first_product(self):
-       # self.first_product.click()
+        # botón favoritos header
+        self.fav_header_button = driver.get_by_test_id(
+            "header-wishlist-button"
+        )
 
     def add_product_to_favorites(self):
+
+        # hover producto
         self.first_product.hover()
-        self.fav_button.click()
+
+        # buscar botón SOLO dentro del producto
+        fav_button = self.first_product.locator(
+            '[data-testid="all-products-wishlist-button"]'
+        )
+
+        # click
+        fav_button.click(force=True)
 
     def open_favorites(self):
         self.fav_header_button.click()

@@ -7,7 +7,7 @@ from playwright.sync_api import sync_playwright
 from pages.favorites_page import FavoritesPage
 
 
-def run():
+def test_favorites():
 
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=False)
@@ -30,5 +30,3 @@ def run():
         print("TEST PASSED")
         browser.close()
 
-if __name__ == "__main__":
-    run()

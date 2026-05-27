@@ -9,7 +9,7 @@ from pages.login_page import LoginPage
 import time
 
 
-def run() -> None:
+def test_login() -> None:
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=False)
         page = browser.new_page()
@@ -35,7 +35,3 @@ def run() -> None:
 
         time.sleep(5)
         browser.close()
-
-
-if __name__ == "__main__":
-    run()
